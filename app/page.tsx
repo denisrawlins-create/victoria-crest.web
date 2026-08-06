@@ -11,7 +11,7 @@ const ranges = [
   { name: "Deep-filled pies", copy: "Buttery pastry and generous savoury fillings.", image: "/victoria/editorial/chicken-pie.jpg" },
   { name: "Chicken burgers", copy: "Tender, versatile patties for quick family meals.", image: "/victoria/editorial/chicken-burger.jpg" },
   { name: "Beef burgers", copy: "Full-flavoured premium burgers made for the grill.", image: "/victoria/editorial/beef-burger.jpg" },
-  { name: "Chicken streaky", copy: "A lighter breakfast favourite made from pure chicken breast.", image: "/victoria/editorial/hero-streaky.jpg" },
+  { name: "Chicken streaky", copy: "A lighter breakfast favourite made from pure chicken breast.", image: "/victoria/editorial/hero-streaky-focused.png" },
 ];
 
 function Logo({ footer = false }: { footer?: boolean }) {
