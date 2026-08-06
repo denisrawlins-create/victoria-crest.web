@@ -14,7 +14,7 @@ const ranges = [
 ];
 
 function Logo({ footer = false }: { footer?: boolean }) {
-  return <span className={footer ? "footer-logo" : "main-logo"}><Image src="/victoria/vc-logo-transparent.png" alt="Victoria Crest — Premium Halal Foods" fill priority={!footer} sizes={footer ? "210px" : "250px"} className="object-contain" /></span>;
+  return <span className={footer ? "footer-logo" : "main-logo"}><Image src="/victoria/vc-logo-transparent-cropped.png" alt="Victoria Crest — Premium Halal Foods" fill priority={!footer} sizes={footer ? "230px" : "270px"} className="logo-image object-contain" /></span>;
 }
 
 function Header() {
