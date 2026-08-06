@@ -77,6 +77,7 @@ footer { background:#170502; color:white; padding:55px 28px; }
 .footer-links a:hover { color:white; }
 .social-links { display:flex; align-items:center; flex-wrap:wrap; justify-content:flex-end; gap:12px; }
 .social-links a { display:flex; align-items:center; gap:8px; padding:10px 13px; border:1px solid #ffffff26; border-radius:999px; color:#ffffffc7; font-size:12px; transition:.2s ease; }
+.social-links a > span { display:grid; place-items:center; width:20px; height:20px; border:1px solid currentColor; border-radius:50%; font-family:Arial,sans-serif; font-weight:700; font-size:12px; line-height:1; }
 .social-links a:hover { color:white; border-color:#d7a72e; background:#ffffff0a; }
 
 @media (max-width:1100px) { .range-grid { grid-template-columns:repeat(2,1fr); } }
