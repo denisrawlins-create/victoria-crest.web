@@ -1,10 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, Check, Menu, ShieldCheck, ShoppingBag, X } from "lucide-react";
+import { ArrowRight, Check, Facebook, Instagram, MapPin, Menu, ShieldCheck, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 
 const SHOP = "https://victoriacrest.oddle.me/en_MY";
+const FACEBOOK = "https://www.facebook.com/victoriacrest";
+const INSTAGRAM = "https://www.instagram.com/victoriacrest_my/";
+const GOOGLE_PROFILE = "https://www.google.com/search?q=victoria+crest";
 
 const ranges = [
   { name: "Premium sausages", copy: "British-style recipes, prime meat and satisfying texture.", image: "/victoria/editorial/lamb-sausages.jpg" },
@@ -40,5 +43,5 @@ export default function Home() {
     <section className="section white"><div className="container meal-grid"><div className="meal-copy"><p className="kicker dark">From freezer to table</p><h2>Easy to cook.<br />Easy to love.</h2><p>Keep dinner simple without settling for ordinary. Cook from frozen, add your favourite sides and serve something everyone will look forward to.</p><ShopButton>Shop Victoria Crest</ShopButton></div><div className="meal-images"><div><Image src="/victoria/editorial/beef-pie.jpg" alt="Victoria Crest deep-filled beef pie" fill sizes="(max-width: 900px) 50vw, 28vw" className="object-cover" /></div><div><Image src="/victoria/editorial/pies-tray.jpg" alt="Freshly baked Victoria Crest pies" fill sizes="(max-width: 900px) 50vw, 28vw" className="object-cover" /></div></div></div></section>
 
     <section className="final-simple"><div><p className="kicker">Ready when you are</p><h2>Bring home<br />the good stuff.</h2><p>Browse the complete range and order directly from our Oddle shop.</p></div><ShopButton pale>Order online now</ShopButton></section>
-  </main><footer><div className="footer-inner"><div><Logo footer /><p>© {new Date().getFullYear()} Victoria Crest. All rights reserved.</p></div><div className="footer-links"><a href="#range">Our range</a><a href="#quality">Our promise</a><a href={SHOP} target="_blank" rel="noopener noreferrer">Order online</a><span className="crest-button"><Image src="/victoria/crest.png" alt="Victoria Crest crest" fill sizes="46px" className="object-cover" /></span></div></div></footer></>;
+  </main><footer><div className="footer-inner"><div><Logo footer /><p>© {new Date().getFullYear()} Victoria Crest. All rights reserved.</p></div><div className="footer-nav"><div className="footer-links"><a href="#range">Our range</a><a href="#quality">Our promise</a><a href={SHOP} target="_blank" rel="noopener noreferrer">Order online</a></div><div className="social-links" aria-label="Victoria Crest social profiles"><a href={FACEBOOK} target="_blank" rel="noopener noreferrer"><Facebook size={18} /> Facebook</a><a href={INSTAGRAM} target="_blank" rel="noopener noreferrer"><Instagram size={18} /> Instagram</a><a href={GOOGLE_PROFILE} target="_blank" rel="noopener noreferrer"><MapPin size={18} /> Google Profile</a><span className="crest-button"><Image src="/victoria/crest.png" alt="Victoria Crest crest" fill sizes="46px" className="object-cover" /></span></div></div></div></footer></>;
 }
