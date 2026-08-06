@@ -1,78 +1,43 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, Check, ChevronRight, Menu, ShieldCheck, ShoppingBag, Sparkles, Truck, X } from "lucide-react";
+import { ArrowRight, Check, Menu, ShieldCheck, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 
 const SHOP = "https://victoriacrest.oddle.me/en_MY";
 
-const products = [
-  { name: "British-style sausages", detail: "Coarse textured, deeply seasoned and made with prime meat.", image: "/victoria/chicken-herb.jpg", tag: "Sausages" },
-  { name: "Premium burgers", detail: "Juicy, full-flavoured patties made for easy family favourites.", image: "/victoria/beef-burger.jpg", tag: "Burgers" },
-  { name: "Deep-filled pies", detail: "Buttery pastry wrapped around generous, savoury fillings.", image: "/victoria/chicken-pie.jpg", tag: "Pies" },
-  { name: "Chicken streaky", detail: "Pure chicken breast with no added nitrites, nitrates or artificial colouring.", image: "/victoria/chicken-streaky.jpg", tag: "Breakfast" },
+const ranges = [
+  { name: "Premium sausages", copy: "British-style recipes, prime meat and satisfying texture.", image: "/victoria/editorial/lamb-sausages.jpg" },
+  { name: "Deep-filled pies", copy: "Buttery pastry and generous savoury fillings.", image: "/victoria/editorial/chicken-pie.jpg" },
+  { name: "Chicken burgers", copy: "Tender, versatile patties for quick family meals.", image: "/victoria/editorial/chicken-burger.jpg" },
+  { name: "Beef burgers", copy: "Full-flavoured premium burgers made for the grill.", image: "/victoria/editorial/beef-burger.jpg" },
 ];
+
+function Logo({ footer = false }: { footer?: boolean }) {
+  return <span className={footer ? "footer-logo" : "main-logo"}><Image src="/victoria/vc-logo-transparent.png" alt="Victoria Crest — Premium Halal Foods" fill priority={!footer} sizes={footer ? "210px" : "250px"} className="object-contain" /></span>;
+}
 
 function Header() {
   const [open, setOpen] = useState(false);
-  return (
-    <header className="absolute inset-x-0 top-0 z-50">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
-        <a href="#top" className="logo-card" aria-label="Victoria Crest home">
-          <Image src="/victoria/vc-logo-plain.jpg" alt="Victoria Crest — Premium Halal Foods" fill priority sizes="240px" className="object-contain object-center" />
-        </a>
-        <nav className="hidden items-center gap-8 text-sm font-semibold text-white lg:flex">
-          <a href="#range">Our range</a><a href="#why">Why Victoria Crest</a>
-          <a href={SHOP} target="_blank" rel="noopener noreferrer" className="order-button"><ShoppingBag size={16} /> Shop online</a>
-          <a href="#top" className="crest-button" aria-label="Victoria Crest home"><Image src="/victoria/crest.png" alt="Victoria Crest V crest" fill sizes="48px" className="object-cover" /></a>
-        </nav>
-        <div className="flex items-center gap-3 lg:hidden">
-          <a href="#top" className="crest-button" aria-label="Victoria Crest home"><Image src="/victoria/crest.png" alt="Victoria Crest V crest" fill sizes="44px" className="object-cover" /></a>
-          <button onClick={() => setOpen(!open)} className="grid size-11 place-items-center border border-white/40 bg-black/20 text-white" aria-label="Toggle menu">{open ? <X /> : <Menu />}</button>
-        </div>
-      </div>
-      {open && <nav className="mx-5 flex flex-col gap-5 border border-white/15 bg-[#370c03]/95 p-6 text-sm font-semibold text-white shadow-2xl lg:hidden"><a href="#range" onClick={() => setOpen(false)}>Our range</a><a href="#why" onClick={() => setOpen(false)}>Why Victoria Crest</a><a href={SHOP} target="_blank" rel="noopener noreferrer" className="text-[#e6ad2f]">Shop online →</a></nav>}
-    </header>
-  );
+  return <header className="site-header"><div className="header-inner"><a href="#top" aria-label="Victoria Crest home"><Logo /></a><nav className="desktop-nav"><a href="#range">Our range</a><a href="#quality">Our promise</a><a href={SHOP} target="_blank" rel="noopener noreferrer" className="nav-shop"><ShoppingBag size={16} /> Shop online</a><a href="#top" className="crest-button" aria-label="Victoria Crest home"><Image src="/victoria/crest.png" alt="Victoria Crest crest" fill sizes="46px" className="object-cover" /></a></nav><div className="mobile-actions"><a href="#top" className="crest-button" aria-label="Victoria Crest home"><Image src="/victoria/crest.png" alt="Victoria Crest crest" fill sizes="42px" className="object-cover" /></a><button onClick={() => setOpen(!open)} aria-label="Toggle menu">{open ? <X /> : <Menu />}</button></div></div>{open && <nav className="mobile-nav"><a href="#range" onClick={() => setOpen(false)}>Our range</a><a href="#quality" onClick={() => setOpen(false)}>Our promise</a><a href={SHOP} target="_blank" rel="noopener noreferrer">Shop online →</a></nav>}</header>;
 }
 
-function ShopLink({ children, light = false, className = "" }: { children: React.ReactNode; light?: boolean; className?: string }) {
-  return <a href={SHOP} target="_blank" rel="noopener noreferrer" className={`${light ? "cta-light" : "cta-gold"} ${className}`}>{children}<ArrowRight size={18} /></a>;
+function ShopButton({ children, pale = false }: { children: React.ReactNode; pale?: boolean }) {
+  return <a href={SHOP} target="_blank" rel="noopener noreferrer" className={pale ? "button button-pale" : "button button-gold"}>{children}<ArrowRight size={18} /></a>;
 }
 
 export default function Home() {
-  return (
-    <><Header /><main id="top">
-      <section className="hero">
-        <Image src="/victoria/banner-1.jpg" alt="Victoria Crest premium halal burgers and sausages" fill priority sizes="100vw" className="object-cover object-[68%_center]" />
-        <div className="hero-overlay" />
-        <div className="relative mx-auto flex min-h-[760px] max-w-7xl items-end px-5 pb-20 pt-36 sm:px-8 md:items-center md:pb-0">
-          <div className="max-w-2xl text-white">
-            <p className="eyebrow"><ShieldCheck size={17} /> Premium halal meat products</p>
-            <h1>Great food.<br /><span>Properly made.</span></h1>
-            <p className="mt-6 max-w-xl text-base leading-7 text-white/78 sm:text-lg">European-inspired comfort food, crafted in Malaysia with prime ingredients and made for effortless, delicious meals at home.</p>
-            <div className="mt-9 flex flex-wrap gap-4"><ShopLink>Order from our shop</ShopLink><a href="#range" className="cta-outline">Explore the range <ChevronRight size={18} /></a></div>
-          </div>
-        </div>
-        <div className="hero-points"><span><Check /> Halal certified</span><span><Check /> Premium meat</span><span><Check /> Quality assured</span></div>
-      </section>
+  return <><Header /><main id="top">
+    <section className="hero-clean"><div className="hero-copy"><div className="hero-copy-inner"><p className="kicker"><ShieldCheck size={17} /> Premium halal foods</p><h1>Comfort food,<br /><em>made properly.</em></h1><p className="hero-intro">European-inspired sausages, burgers, pies and chicken favourites, crafted in Malaysia with quality ingredients.</p><div className="hero-actions"><ShopButton>Order online</ShopButton><a href="#range" className="text-link">Explore our range <ArrowRight size={17} /></a></div></div></div><div className="hero-photo"><Image src="/victoria/editorial/hero-streaky.jpg" alt="Victoria Crest chicken streaky breakfast" fill priority sizes="(max-width: 900px) 100vw, 56vw" className="object-cover" /></div></section>
 
-      <section id="range" className="section-shell bg-[#fbf6ed]">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="section-heading"><div><p className="eyebrow dark">The favourites</p><h2>Something good<br />for every table.</h2></div><p>From hearty British-style sausages to golden pies and everyday staples, discover premium halal favourites made for sharing.</p></div>
-          <div className="product-grid">{products.map((product) => <a key={product.name} href={SHOP} target="_blank" rel="noopener noreferrer" className="product-card"><div className="product-image"><Image src={product.image} alt={product.name} fill sizes="(max-width: 768px) 100vw, 25vw" className="object-cover transition duration-700 group-hover:scale-105" /><span>{product.tag}</span></div><div className="p-6"><h3>{product.name}</h3><p>{product.detail}</p><strong>Shop the range <ArrowRight size={16} /></strong></div></a>)}</div>
-          <div className="mt-12 text-center"><ShopLink className="inline-flex">See the full range</ShopLink></div>
-        </div>
-      </section>
+    <section className="trust-strip"><div><Check /> Halal certified</div><div><Check /> Quality ingredients</div><div><Check /> Made in Malaysia</div><div><Check /> Delivered to your door</div></section>
 
-      <section id="why" className="grid lg:grid-cols-2">
-        <div className="relative min-h-[540px]"><Image src="/victoria/banner-5.jpg" alt="Victoria Crest smoked chicken and premium burger" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover object-[68%_center]" /></div>
-        <div className="flex items-center bg-[#370c03] px-6 py-20 text-white sm:px-12 lg:px-16"><div className="max-w-xl"><p className="eyebrow">Why Victoria Crest</p><h2>Premium by tradition.<br />Made for today.</h2><p className="mt-6 leading-7 text-white/70">Victoria Crest brings the pleasure of European comfort food to Malaysian homes. Every product is built around flavour, quality and the confidence of halal-certified production.</p><div className="promise-grid"><div><Sparkles /><h3>Crafted with care</h3><p>Thoughtful recipes and quality ingredients in every bite.</p></div><div><ShieldCheck /><h3>Halal certified</h3><p>Made for everyone to enjoy with confidence.</p></div><div><Truck /><h3>Delivered chilled</h3><p>Order online and have favourites sent to your door.</p></div></div><ShopLink>Fill your freezer</ShopLink></div></div>
-      </section>
+    <section id="range" className="section cream"><div className="container"><div className="section-intro"><p className="kicker dark">Shop the favourites</p><h2>Good food for<br />real life.</h2><p>Reliable freezer favourites for breakfasts, family dinners, weekend grills and easy entertaining.</p></div><div className="range-grid">{ranges.map(item => <a key={item.name} href={SHOP} target="_blank" rel="noopener noreferrer" className="range-card"><div className="range-photo"><Image src={item.image} alt={item.name} fill sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 25vw" className="object-cover" /></div><div className="range-copy"><h3>{item.name}</h3><p>{item.copy}</p><span>Shop now <ArrowRight size={15} /></span></div></a>)}</div><div className="center"><ShopButton>View the full range</ShopButton></div></div></section>
 
-      <section className="section-shell bg-white"><div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1.15fr]"><div><p className="eyebrow dark">Easy meals, memorable flavour</p><h2>Breakfast to barbecue,<br />sorted.</h2><p className="mt-6 max-w-xl leading-7 text-[#5d514d]">Keep Victoria Crest on hand for quick breakfasts, family dinners, weekend grills and last-minute gatherings. Less prep. More flavour. Happier tables.</p><ShopLink className="mt-8 inline-flex">Shop Victoria Crest</ShopLink></div><div className="relative aspect-[16/9] overflow-hidden shadow-2xl"><Image src="/victoria/banner-4.jpg" alt="Victoria Crest premium halal range" fill sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" /></div></div></section>
+    <section id="quality" className="split-story"><div className="story-photo"><Image src="/victoria/editorial/dynamite.jpg" alt="Victoria Crest dynamite chicken sausages" fill sizes="(max-width: 900px) 100vw, 50vw" className="object-cover" /></div><div className="story-copy"><div><p className="kicker">The Victoria Crest promise</p><h2>Premium flavour.<br />No fuss.</h2><p>Victoria Crest brings European comfort-food traditions to Malaysian homes. Our focus is simple: dependable quality, satisfying flavour and food the whole table can enjoy.</p><ul><li><Check /> Halal-certified production</li><li><Check /> Carefully developed recipes</li><li><Check /> Convenient frozen favourites</li></ul><ShopButton>Fill your freezer</ShopButton></div></div></section>
 
-      <section className="final-cta"><Image src="/victoria/banner-2.jpg" alt="Victoria Crest premium pies" fill sizes="100vw" className="object-cover object-[70%_center]" /><div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/15" /><div className="relative mx-auto max-w-7xl px-5 py-24 text-white sm:px-8"><div className="max-w-xl"><p className="eyebrow">Your next meal starts here</p><h2>Bring home<br />the good stuff.</h2><p className="mt-5 max-w-lg text-lg text-white/75">Browse the complete Victoria Crest range and order online for delivery across the Klang Valley.</p><ShopLink light className="mt-8 inline-flex">Order online now</ShopLink></div></div></section>
-    </main><footer className="bg-[#1e0703] px-5 py-12 text-white sm:px-8"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-10 md:flex-row md:items-end"><div><div className="flex items-center gap-4"><div className="relative h-20 w-52 overflow-hidden rounded bg-white"><Image src="/victoria/vc-logo-plain.jpg" alt="Victoria Crest — Premium Halal Foods" fill sizes="208px" className="object-contain" /></div><div className="crest-button size-12"><Image src="/victoria/crest.png" alt="Victoria Crest V crest" fill sizes="48px" className="object-cover" /></div></div><p className="mt-5 text-xs text-white/45">© {new Date().getFullYear()} Victoria Crest. All rights reserved.</p></div><div className="flex flex-wrap gap-x-7 gap-y-3 text-sm text-white/70"><a href="#range">Our range</a><a href="#why">Why Victoria Crest</a><a href={SHOP} target="_blank" rel="noopener noreferrer">Order online</a></div></div></footer></>
-  );
+    <section className="section white"><div className="container meal-grid"><div className="meal-copy"><p className="kicker dark">From freezer to table</p><h2>Easy to cook.<br />Easy to love.</h2><p>Keep dinner simple without settling for ordinary. Cook from frozen, add your favourite sides and serve something everyone will look forward to.</p><ShopButton>Shop Victoria Crest</ShopButton></div><div className="meal-images"><div><Image src="/victoria/editorial/beef-pie.jpg" alt="Victoria Crest deep-filled beef pie" fill sizes="(max-width: 900px) 50vw, 28vw" className="object-cover" /></div><div><Image src="/victoria/editorial/pies-tray.jpg" alt="Freshly baked Victoria Crest pies" fill sizes="(max-width: 900px) 50vw, 28vw" className="object-cover" /></div></div></div></section>
+
+    <section className="final-simple"><div><p className="kicker">Ready when you are</p><h2>Bring home<br />the good stuff.</h2><p>Browse the complete range and order directly from our Oddle shop.</p></div><ShopButton pale>Order online now</ShopButton></section>
+  </main><footer><div className="footer-inner"><div><Logo footer /><p>© {new Date().getFullYear()} Victoria Crest. All rights reserved.</p></div><div className="footer-links"><a href="#range">Our range</a><a href="#quality">Our promise</a><a href={SHOP} target="_blank" rel="noopener noreferrer">Order online</a><span className="crest-button"><Image src="/victoria/crest.png" alt="Victoria Crest crest" fill sizes="46px" className="object-cover" /></span></div></div></footer></>;
 }
